@@ -45,6 +45,7 @@ act <- read.csv("activity.csv")
 
 ```
 
+
 ## What is mean total number of steps taken per day?
 - The mean of the total number of steps taken per day is 10766.19 steps per day.
 - The median of the total number of steps taken per day is 10765 steps per day.
@@ -72,7 +73,8 @@ text(spdmn, 15, paste("Mean = ", round(spdmn, 2)),col = "Red",pos = 4)
 # place median label on plot.
 text(spdmn, 13, paste("Median = ", round(spdmdn, 2)),col = "Red",pos = 4)
 ```
-    
+ https://github.com/Whockensmith/RepData_PeerAssessment1/blob/master/histo1.png   
+ 
 ## What is the average daily activity pattern?
 ```{r Plot, echo=TRUE}
 # Get the mean of the steps by interval (time of each day).
