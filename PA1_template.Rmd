@@ -1,8 +1,4 @@
----
-
-<center> <h1>Differences In Activity Patterns Between Weekdays And Weekends </center>
-
----
+# <center> <h1>Differences in activity paterns between weekdays and weekends</center>
   
 ## Introduction
 
@@ -10,10 +6,10 @@ It is now possible to collect a large amount of data about personal movement usi
 
 We were asked to look at some data collected by one of these devices.  The device collected data at 5 minute intervals through out the day. The data consists of two months of data from an anonymous individual collected during the months of October and November, 2012 and includes the number of steps taken in 5 minute intervals each day. There were four questions from this data that were to be answered.
 
-1. What is the total number of steps taken per-day?   
+1. What is the total number of steps taken perday?   
 2. What is the average daily activity pattern?   
 3. Does the missing data (NAs) effect median or mean of the data?   
-4. Are there differences in activity between weekdays and weekends?
+4. Are ther differences in activity between weekdays and weekends?
 
 
 
@@ -22,91 +18,106 @@ We were asked to look at some data collected by one of these devices.  The devic
 [3]:https://jawbone.com/up "Jawbone Up"
 
 ### Collecting the data
-The data for this analysis ([Activity monitoring data][4]) was downloaded from the course website 
-URL <- http://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip.
-The data set is a comma-separated-value (CSV) file with 17,568 observations, one header row, and three columns.  The size of the file is 52K.
-
-[4]:http://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip "Activity monitoring data"
+The data for this analysis was downloaded from the course website 
+url <- "https://d396qusza40orc.cloudfront.net/repdata%Fdata%2Factivity.zip"
+The dataset is a comma-separated-value (CSV) file with 17,568 observations and one header row.  The size of the file is 52K.
 
 The variables with in the data set are:
 
 1.  steps: The number of steps.    
-    - Measured in 5 minute intervals.   
+    - Measured in 5 minute intervales.   
     - Missing values are coded as NA.
 2.  date: The date the measurement was taken.    
     - format (YYY-MM-DD)
-3.  interval: Identifier for the 5-minute interval the measurement was taken.
+3.  interval: Indentifer for the 5-minute interval the measurement was taken.
 
-### Loading and preprocessing the data
-```{r dataload, echo=TRUE}
+## Loading and preprocessing the data
+
+```r
 #  I did not include the code to download the data from R do to differences in platforms and individual system setups and preferences for downloading data sets. Once your data is downloaded read the data set.
 act <- read.csv("activity.csv")
-
-
 ```
-
 
 ## What is mean total number of steps taken per day?
 - The mean of the total number of steps taken per day is 10766.19 steps per day.
-- The median of the total number of steps taken per day is 10765 steps per day.
+- The median ot the total number of steps taken per day is 10765 steps per day.
 
-```{r Mean, echo=TRUE}
+
+```r
 #  Calculate the number of steps taken a day.
  spd <- aggregate(steps~date, act,sum)
 #  Get the mean of the steps per day.
  spdmn <- mean(spd$steps)
  spdmn
 ```
-```{r Median}
+
+```
+## [1] 10766.19
+```
+
+```r
 # Get the median of the steps per day.
 spdmdn <- median(spd$steps)
 spdmdn
 ```
+
+```
+## [1] 10765
+```
 - Histogram of step per day.
-```{r histogram, echo=TRUE}
+
+```r
 # builds the histogram
 hist(spd$steps, main = paste("Total Steps Per Day"), col="light blue", ylab= "Number of days Occurred (frequency)", xlab="Number of Steps", breaks=seq(0,22000,2200))
-# Plots a vertical line where the mean is located.  Did not plot a seperate line for median because it is .81 less than mean, it will overlay the other linetm.
+# Plots a vertical line where the mean is located.  Did not plot a seperate line for median because it is .81 less than mean, it will overlay.
 abline(v=spdmn, col="red",lwd=4)
 # Place mean label on plot.
 text(spdmn, 15, paste("Mean = ", round(spdmn, 2)),col = "Red",pos = 4)
 # place median label on plot.
 text(spdmn, 13, paste("Median = ", round(spdmdn, 2)),col = "Red",pos = 4)
 ```
- https://github.com/Whockensmith/RepData_PeerAssessment1/blob/master/histo1.png   
- 
+
+![Histogram1](https://github.com/Whockensmith/RepData_PeerAssessment1/blob/master/histo1.png)
+
 ## What is the average daily activity pattern?
-```{r Plot, echo=TRUE}
+
+```r
 # Get the mean of the steps by interval (time of each day).
 sbi <- aggregate(steps~interval, act,mean)
 # Build a plot
 plot(sbi$interval,sbi$steps, xlab = "Time Interval", ylab = "Number of Steps", main = "Daily Activity Patter")
 # Add a vertical line at the highest time of most steps
 Maxint <- sbi[which.max(sbi$steps),1]
-Maxint2 <- c("Interval with max average steps is " ,  Maxint)
-Maxspt <- subset(sbi, interval=="835" , select=steps)
-Maxspt2 <-  round(Maxspt[which.max(Maxspt$steps),1],2)
-Maxspt3 <- c("Maximum average number of steps is ", Maxspt2)
-Maxint2
-Maxspt3
-abline(v= Maxint,lwd=2,col="red")
-text(Maxint,Maxspt2, paste(Maxint," has the higest average number of steps"),col = "Red",pos = 4)
-text(Maxint,Maxspt2, paste(Maxspt2," steps"),col = "Blue",pos = 2)
+Maxint
 ```
-    
-The daily activity pattern is shown in the graph above.  The Time Interval axis is displayed on a 24HR time scale (500 = 5am, 2000 = 10pm) and readings were taken every 5 minutes.   
-The graph shows that 8:35 am has the highest number of steps counted. The average number of steps counted at 8:35 am was 206.17. 
 
-## Does the missing data (NAs) effect median or mean of the data?
+```
+## [1] 835
+```
+
+```r
+abline(v= Maxint,lwd=2,col="red")
+text(Maxint,200, paste(Maxint," has the higest average number of steps"),col = "Red",pos = 4)
+```
+
+![Box Plot](https://github.com/Whockensmith/RepData_PeerAssessment1/blob/master/histo2.png)
 
 
-There are 2304 missing data points.  These points are recorded as NA in the steps column of the data set.  To calculate this the (NAs) need to be changed to a number.  
-```{r Fix NAs, echo=TRUE}
+## Imputing missing values
+
+
+
+```r
 #  Replace all NAs in steps column to the average steps for that time interval from the other days at that time interval.
 actfx <- transform(act, steps = ifelse(is.na(act$steps), sbi$steps[match(act$interval, sbi$interval)], act$steps))
 spdfx <- aggregate(steps~date, actfx,sum)
 spdfxmn <- mean(spdfx$steps)
 spdfxmdn <- median(spdfx$steps)
+```
+
+
+
+```r
 hist(spdfx$steps, main = paste("Total Steps Per Day"), col="light blue", ylab= "Number of days Occurred (frequency)", xlab="Number of Steps", breaks=seq(0,22000,2200))
 abline(v=spdfxmn, col="red",lwd=4)
 # Place mean label on plot.
@@ -115,55 +126,27 @@ text(spdfxmn, 22, paste("Mean = ", round(spdfxmn, 2)),col = "Red",pos = 4)
 text(spdfxmn, 20, paste("Median = ", round(spdfxmdn, 2)),col = "Red",pos = 4)
 ```
 
+![Histogram 3](https://github.com/Whockensmith/RepData_PeerAssessment1/blob/master/histo3.png)
 
 ## Compairing the two histograms.   
-  - The First graph is with (NAs) and the second graph is with the (NAs) corrected to average steps based off of other days at that time with data.
+  - First with (NAs) and with (NAs) corrected to averages based off of other days with data.
 
-```{r , echo=TRUE}
-hist(spd$steps, main = paste("Total Steps Per Day With NAs"), col="light blue", ylab= "Number of days Occurred (frequency)", xlab="Number of Steps", breaks=seq(0,22000,2200))
-# Plots a vertical line where the mean is located.  Did not plot a seperate line for median because it is .81 less than mean, it will overlay.
-abline(v=spdmn, col="red",lwd=4)
-abline(h=2,col="grey",lwd=0)
-abline(h=3,col="grey",lwd=0)
-abline(h=5,col="grey",lwd=0)
-abline(h=9,col="grey",lwd=0)
-abline(h=12,col="grey",lwd=0)
-abline(h=15,col="grey",lwd=0)
-# Place mean label on plot.
-text(spdmn, 15, paste("Mean = ", round(spdmn, 2)),col = "Red",pos = 4)
-# place median label on plot.
-text(spdmn, 13, paste("Median = ", round(spdmdn, 2)),col = "Red",pos = 4)
-```
-    
+![Histogram 4] (https://github.com/Whockensmith/RepData_PeerAssessment1/blob/master/histo4.png) ![Histogram 5] (https://github.com/Whockensmith/RepData_PeerAssessment1/blob/master/histo5.png)
 
-```{r, echo=TRUE}
-hist(spdfx$steps, main = paste("Total Steps Per Day NAs Fixed"), col="light blue", ylab= "Number of days Occurred (frequency)", xlab="Number of Steps", breaks=seq(0,22000,2200))
-abline(v=spdfxmn, col="red",lwd=4)
-abline(h=2,col="grey",lwd=0)
-abline(h=3,col="grey",lwd=0)
-abline(h=5,col="grey",lwd=0)
-abline(h=9,col="grey",lwd=0)
-abline(h=12,col="grey",lwd=0)
-abline(h=15,col="grey",lwd=0)
-# Place mean label on plot.
-text(spdfxmn, 22, paste("Mean = ", round(spdfxmn, 2)),col = "Red",pos = 4)
-# place median label on plot.
-text(spdfxmn, 20, paste("Median = ", round(spdfxmdn, 2)),col = "Red",pos = 4)
-```
-    
-    
-Comparing the two graphs, the mean remained the same in both. In the graph with the (NAs) fixed, the median matched the mean, however the frequency of the band the mean is in increased while the frequency of the rest of the bands remain virtually unchanged.  A horizontal line was placed at 2, 3, 5, 9, 12, and 15 to help illustrate this.
+###### Comparing the two graphs, the mean remained the same in both. In the graph with the (NAs) fixed, the median matched the mean, however the frequency of the band the mean is in increased while the frequency of the rest of the bands remain virtually unchanged. A horizontal line was placed at 2, 3, 5, 9, 12, and 15 to help illustrate this.
+
 
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
-``` {r, echo=TRUE}
+
+```r 
 weekdays <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
 actfx$dow = as.factor(ifelse(is.element(weekdays(as.Date(actfx$date)),weekdays), "Weekday", "Weekend"))
 sbi2 <- aggregate(steps ~ interval + dow, actfx, mean)
 library(lattice)
 xyplot(sbi2$steps ~ sbi2$interval|sbi2$dow, main="Average Steps per Day by Interval",xlab="Interval", ylab="Steps",layout=c(1,2), type="l")
-
 ```
+![Lattic Plot] (https://github.com/Whockensmith/RepData_PeerAssessment1/blob/master/latic.png)
 
-Compairing the Weekend to weekdays it appears there is still a spike around the 8:35 am.  However there is more activity all day long throuhg out the day for the weekend.
+#### Compairing the Weekend to weekdays it appears there is still a spike around the 8:35 am. However there is more activity all day long throuhg out the day for the weekend.
