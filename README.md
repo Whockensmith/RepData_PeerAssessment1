@@ -139,3 +139,11 @@ text(spdfxmn, 20, paste("Median = ", round(spdfxmdn, 2)),col = "Red",pos = 4)
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
+
+```r 
+weekdays <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
+actfx$dow = as.factor(ifelse(is.element(weekdays(as.Date(actfx$date)),weekdays), "Weekday", "Weekend"))
+sbi2 <- aggregate(steps ~ interval + dow, actfx, mean)
+library(lattice)
+xyplot(sbi2$steps ~ sbi2$interval|sbi2$dow, main="Average Steps per Day by Interval",xlab="Interval", ylab="Steps",layout=c(1,2), type="l")
+```
