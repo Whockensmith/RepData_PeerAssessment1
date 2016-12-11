@@ -133,7 +133,7 @@ text(spdfxmn, 20, paste("Median = ", round(spdfxmdn, 2)),col = "Red",pos = 4)
 
 ![Histogram 4] (https://github.com/Whockensmith/RepData_PeerAssessment1/blob/master/histo4.png) ![Histogram 5] (https://github.com/Whockensmith/RepData_PeerAssessment1/blob/master/histo5.png)
 
-###### Compairing the two the mean remained the same, but when the (NAs) were fixed the median mached the mean and the frequency of the band the mean is in increased.
+###### Comparing the two graphs, the mean remained the same in both. In the graph with the (NAs) fixed, the median matched the mean, however the frequency of the band the mean is in increased while the frequency of the rest of the bands remain virtually unchanged. A horizontal line was placed at 2, 3, 5, 9, 12, and 15 to help illustrate this.
 
 
 
