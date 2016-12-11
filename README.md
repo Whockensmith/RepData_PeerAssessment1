@@ -149,4 +149,4 @@ xyplot(sbi2$steps ~ sbi2$interval|sbi2$dow, main="Average Steps per Day by Inter
 ```
 ![Lattic Plot] (https://github.com/Whockensmith/RepData_PeerAssessment1/blob/master/latic.png)
 
-**** Compairing the Weekend to weekdays it appears there is still a spike around the 8:35 am. However there is more activity all day long throuhg out the day for the weekend.
+### Compairing the Weekend to weekdays it appears there is still a spike around the 8:35 am. However there is more activity all day long throuhg out the day for the weekend.
