@@ -77,7 +77,7 @@ text(spdmn, 15, paste("Mean = ", round(spdmn, 2)),col = "Red",pos = 4)
 text(spdmn, 13, paste("Median = ", round(spdmdn, 2)),col = "Red",pos = 4)
 ```
 
-![](Differences_in_activity_paterns_between_weekdays_and_weekends_files/figure-html/histogram-1.png)<!-- -->
+![Histogram1](https://github.com/Whockensmith/RepData_PeerAssessment1/blob/master/histo1.png)
 
 ## What is the average daily activity pattern?
 
@@ -100,7 +100,7 @@ abline(v= Maxint,lwd=2,col="red")
 text(Maxint,200, paste(Maxint," has the higest average number of steps"),col = "Red",pos = 4)
 ```
 
-![](Differences_in_activity_paterns_between_weekdays_and_weekends_files/figure-html/Plot-1.png)<!-- -->
+![Box Plot](https://github.com/Whockensmith/RepData_PeerAssessment1/blob/master/histo2.png)
 
 
 ## Imputing missing values
@@ -126,8 +126,7 @@ text(spdfxmn, 22, paste("Mean = ", round(spdfxmn, 2)),col = "Red",pos = 4)
 text(spdfxmn, 20, paste("Median = ", round(spdfxmdn, 2)),col = "Red",pos = 4)
 ```
 
-![](Differences_in_activity_paterns_between_weekdays_and_weekends_files/figure-html/Histogram-1.png)<!-- -->
-
+![Histogram 3](https://github.com/Whockensmith/RepData_PeerAssessment1/blob/master/histo3.png)
 
 ## Compairing the two histograms.   
   - First with (NAs) and with (NAs) corrected to averages based off of other days with data.
